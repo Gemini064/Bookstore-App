@@ -1,14 +1,20 @@
 ﻿@model IEnumerable<MvcBookstore.Models.Book>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Book List";
 }
-
-<h1>Index</h1>
 
 <p>
     <!-- <a asp-action="Create">Create New</a> -->
 </p>
+
+<form asp-controller="Books" asp-action="Index" method="get">
+    <p>
+        Title: <input type="text" name="SearchString"/>
+        <input type="submit" value="Filter"/>
+    </p>
+</form>
+
 <table class="table">
     <thead>
         <tr>
@@ -19,7 +25,7 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
@@ -33,6 +39,6 @@
                 -->
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

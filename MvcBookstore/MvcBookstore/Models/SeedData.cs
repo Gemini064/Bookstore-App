@@ -22,17 +22,14 @@ public static class SeedData
             context.Book.AddRange(
                 new Book
                 {
-                    Id = 1,
                     Title = "CQRS for Dummies"
                 },
                 new Book
                 {
-                    Id = 2,
                     Title = "Visual Studio Tips"
                 },
                 new Book
                 {
-                    Id = 3,
                     Title = "NHibernate Cookbook"
                 }
             );
