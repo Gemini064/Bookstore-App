@@ -1,0 +1,45 @@
+﻿@model MvcBookstore.Models.Book
+
+@{
+    ViewData["Title"] = "Reserve";
+}
+
+@if (ViewData.ContainsKey("BookingNumber"))
+{
+    <h2>Reserve Book "@Html.DisplayFor(model => model.Title)"</h2>
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class = "col-sm-2">
+                Booking Number
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.BookingNumber)
+            </dd>
+
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+            <dt class = "col-sm-2">
+                Book ID
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.BookId)
+            </dd>
+        </dl>
+    </div>
+}
+else {
+    <div>
+        <h2>Oops! This book has been reserved by other customers.</h2>
+        <h2>Please try next time.</h2>
+    </div>
+}
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

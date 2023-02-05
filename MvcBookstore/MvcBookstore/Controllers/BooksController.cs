@@ -69,7 +69,7 @@ namespace MvcBookstore.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,BookId")] Book book)
+        public async Task<IActionResult> Create([Bind("Id,Title,BookId,BookingNumber")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,6 @@ namespace MvcBookstore.Controllers
             }
             return View(book);
         }
-
         // GET: Books/Edit
         public async Task<IActionResult> Edit(int? id)
         {
@@ -99,7 +98,7 @@ namespace MvcBookstore.Controllers
         // POST: Books/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,BookId")] Book book)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,BookId,BookingNumber")] Book book)
         {
             if (id != book.Id)
             {
@@ -166,6 +165,38 @@ namespace MvcBookstore.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // Instantiate random number generator.  
+        private readonly Random _random = new Random();
+
+        // Generates a random number within a range.      
+        public int RandomNumber(int min, int max)
+        {
+            return _random.Next(min, max);
+        }
+
+        // GET: Books/Reserve/
+        public async Task<IActionResult> Reserve(int? id)
+        {
+            if (id == null || _context.Book == null)
+            {
+                return NotFound();
+            }
+
+            var book = await _context.Book
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+            else if (book.BookingNumber == 0)
+            {
+                ViewData["BookingNumber"] = true;
+                book.BookingNumber = RandomNumber(100000000, 999999999);
+                _context.Update(book);
+                await _context.SaveChangesAsync();
+            }
+            return View(book);
+        }
         private bool BookExists(int id)
         {
           return (_context.Book?.Any(e => e.Id == id)).GetValueOrDefault();

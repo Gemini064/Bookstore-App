@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MvcBookstore.Data;
 
@@ -10,9 +11,11 @@ using MvcBookstore.Data;
 namespace MvcBookstore.Migrations
 {
     [DbContext(typeof(MvcBookstoreContext))]
-    partial class MvcBookstoreContextModelSnapshot : ModelSnapshot
+    [Migration("20230205044304_InitialCreateReserveModel")]
+    partial class InitialCreateReserveModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,9 +34,6 @@ namespace MvcBookstore.Migrations
 
                     b.Property<string>("BookId")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("BookingNumber")
-                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");

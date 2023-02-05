@@ -7,5 +7,6 @@ namespace MvcBookstore.Models
         public int Id { get; set; }
         public string? Title { get; set; }
         public string? BookId { get; set; }
+        public int BookingNumber { get; set; }
     }
 }
