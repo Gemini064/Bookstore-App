@@ -59,14 +59,17 @@ namespace MvcBookstore.Controllers
         }
 
         // GET: Books/Create
+        /*
         public IActionResult Create()
         {
             return View();
         }
+        */
 
         // POST: Books/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /*
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,BookId,BookingNumber,Description")] Book book)
@@ -79,7 +82,9 @@ namespace MvcBookstore.Controllers
             }
             return View(book);
         }
+        */
         // GET: Books/Edit
+        /*
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Book == null)
@@ -94,8 +99,10 @@ namespace MvcBookstore.Controllers
             }
             return View(book);
         }
+        */
 
         // POST: Books/Edit
+        /*
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,BookId,BookingNumber,Description")] Book book)
@@ -127,8 +134,10 @@ namespace MvcBookstore.Controllers
             }
             return View(book);
         }
+        */
 
         // GET: Books/Delete
+        /*
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Book == null)
@@ -145,8 +154,10 @@ namespace MvcBookstore.Controllers
 
             return View(book);
         }
+        */
 
         // POST: Books/Delete
+        /*
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -164,6 +175,7 @@ namespace MvcBookstore.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        */
 
         // Instantiate random number generator.  
         private readonly Random _random = new Random();
