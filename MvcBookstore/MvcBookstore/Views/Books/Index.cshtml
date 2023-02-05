@@ -10,7 +10,7 @@
 
 <form asp-controller="Books" asp-action="Index" method="get">
     <p>
-        Title: <input type="text" name="SearchString"/>
+        <input type="text" name="SearchString" placeholder="Title or Book ID" />
         <input type="submit" value="Filter"/>
     </p>
 </form>
@@ -20,6 +20,9 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                Book ID
             </th>
             <th></th>
         </tr>
@@ -31,14 +34,24 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.BookId)
+            </td>
+            <td>
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                 <!--
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 -->
             </td>
         </tr>
     }
     </tbody>
 </table>
+
+<div>
+    @if (ViewData.ContainsKey("SearchString"))
+    {
+        <a asp-action="Index">Back to List</a>
+    }
+</div>

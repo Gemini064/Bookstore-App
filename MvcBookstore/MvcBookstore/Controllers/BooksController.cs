@@ -32,9 +32,11 @@ namespace MvcBookstore.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                books = books.Where(book => book.Title!.Contains(searchString));
-            }
+                books = books.Where(book => book.Title!.Contains(searchString) ||
+                                            book.BookId!.Contains(searchString));
 
+                ViewData["SearchString"] = true;
+            }
             return View(await books.ToListAsync());
         }
 
@@ -67,7 +69,7 @@ namespace MvcBookstore.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title")] Book book)
+        public async Task<IActionResult> Create([Bind("Id,Title,BookId")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +99,7 @@ namespace MvcBookstore.Controllers
         // POST: Books/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title")] Book book)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,BookId")] Book book)
         {
             if (id != book.Id)
             {
@@ -152,7 +154,7 @@ namespace MvcBookstore.Controllers
         {
             if (_context.Book == null)
             {
-                return Problem("Entity set 'MvcBookstoreContext.Book'  is null.");
+                return Problem("Entity set 'MvcBookstoreContext.Book' is null.");
             }
             var book = await _context.Book.FindAsync(id);
             if (book != null)
